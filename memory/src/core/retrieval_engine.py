@@ -154,20 +154,44 @@ class RetrievalEngine:
         Returns:
             List[Dict]: Top-k时间最接近的记忆片段
         """
-        target_time = datetime.strptime(time_query, "%Y/%m/%d %H:%M:%S")
+        # 解析查询时间
+        try:
+            target_time = datetime.strptime(time_query, "%Y/%m/%d %H:%M:%S")
+        except ValueError:
+            print(f"无法解析查询时间: {time_query}")
+            return []
         
         results = []
         for idx, item in enumerate(self.data):
-            item_time = datetime.strptime(item['time'], "%Y/%m/%d %H:%M:%S")
-            time_diff = abs((target_time - item_time).total_seconds())
-            
-            results.append({
-                'index': idx,
-                'caption': item['caption'],
-                'time': item['time'],
-                'position': item['position'],
-                'time_diff': time_diff
-            })
+            try:
+                # 尝试两种时间格式
+                item_time_str = item['time']
+                
+                # 格式1: "YYYY/MM/DD HH:MM:SS"
+                try:
+                    item_time = datetime.strptime(item_time_str, "%Y/%m/%d %H:%M:%S")
+                except ValueError:
+                    # 格式2: "YYYY/MM/DD/HH/MM/SS" 
+                    try:
+                        item_time = datetime.strptime(item_time_str, "%Y/%m/%d/%H/%M/%S")
+                    except ValueError:
+                        print(f"无法解析数据库时间: {item_time_str}")
+                        continue
+                
+                # 计算时间差
+                time_diff = abs((target_time - item_time).total_seconds())
+                
+                results.append({
+                    'index': idx,
+                    'caption': item['caption'],
+                    'time': item['time'],
+                    'position': item['position'],
+                    'time_diff': time_diff
+                })
+                
+            except Exception as e:
+                print(f"处理索引 {idx} 时出错: {e}")
+                continue
         
         # 按时间差排序
         results.sort(key=lambda x: x['time_diff'])
