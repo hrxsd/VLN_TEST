@@ -1,0 +1,30 @@
+# Vector Retrieval ROS System Configuration
+
+# 数据库配置
+database:
+  path: "/home/sony/vln-test/memory/data/vector_database.json"
+
+# 嵌入模型配置
+embedding:
+  model_id: "mixedbread-ai/mxbai-embed-large-v1"
+  device: "auto"  # "cuda", "cpu" or "auto"
+
+# OpenAI API配置
+openai:
+  api_key: "sk-iP0rxrsx3P8WevFlAe14F026043c4fC3B33b19E6DfE2Ae7e"
+  api_base: "https://api.gpt.ge/v1"
+  model: "gpt-4"
+  temperature: 0.3
+  max_tokens: 300
+
+# ROS配置
+ros:
+  map_frame: "map"
+  robot_frame: "pelvis"
+  goal_tolerance: 0.5
+  move_base_timeout: 10.0
+
+# 检索配置
+retrieval:
+  top_k: 5  # 返回top k个结果
+  similarity_threshold: 0.5  # 相似度阈值
