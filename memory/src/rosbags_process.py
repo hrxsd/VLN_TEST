@@ -134,7 +134,7 @@ class RosbagImageExtractor:
         
         # 设置字体参数
         font = cv2.FONT_HERSHEY_SIMPLEX
-        font_scale = 0.6
+        font_scale = 1.0
         color = (255, 255, 255)  # 白色
         thickness = 2
         bg_color = (0, 0, 0)  # 黑色背景
@@ -147,7 +147,7 @@ class RosbagImageExtractor:
         (pos_w, pos_h), _ = cv2.getTextSize(pos_str, font, font_scale, thickness)
         
         # 设置文本位置（右上角）
-        margin = 20
+        margin = 10
         time_x = width - time_w - margin
         time_y = margin + time_h
         pos_x = width - pos_w - margin

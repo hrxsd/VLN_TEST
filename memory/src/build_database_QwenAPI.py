@@ -9,7 +9,7 @@ import time
 from sentence_transformers import SentenceTransformer
 
 class ImageProcessor:
-    def __init__(self, api_key: str, model_name: str = 'qwen2.5-vl-72b-instruct'):
+    def __init__(self, api_key: str, model_name: str = 'qwen-vl-plus'):
         """
         初始化图像处理器
         
