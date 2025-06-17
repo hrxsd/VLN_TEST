@@ -13,7 +13,7 @@ embedding:
 openai:
   api_key: "sk-iP0rxrsx3P8WevFlAe14F026043c4fC3B33b19E6DfE2Ae7e"
   api_base: "https://api.gpt.ge/v1"
-  model: "gpt-4"
+  model: "gpt-4o-2024-11-20"
   temperature: 0.3
   max_tokens: 300
 

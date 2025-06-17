@@ -147,17 +147,21 @@ class RosbagImageExtractor:
         (pos_w, pos_h), _ = cv2.getTextSize(pos_str, font, font_scale, thickness)
         
         # 设置文本位置（右上角）
-        margin = 10
+        margin = 20
         time_x = width - time_w - margin
         time_y = margin + time_h
         pos_x = width - pos_w - margin
         pos_y = time_y + pos_h + 5
         
         # 绘制背景矩形
-        cv2.rectangle(cv_image, 
-                     (time_x - 5, time_y - time_h - 5), 
-                     (width - margin + 5, pos_y + 5), 
-                     bg_color, -1)
+        # 扩大背景区域的边界
+        bg_margin_x = 20
+        bg_margin_y = 20
+        top_left = (min(time_x, pos_x) - bg_margin_x, time_y - time_h - bg_margin_y)
+        bottom_right = (width - margin + bg_margin_x, pos_y + bg_margin_y)
+
+        cv2.rectangle(cv_image, top_left, bottom_right, bg_color, -1)
+
         
         # 绘制文本
         cv2.putText(cv_image, time_str, (time_x, time_y), font, font_scale, color, thickness)
