@@ -169,7 +169,7 @@ class RetrievalEngine:
                 
                 # 格式1: "YYYY/MM/DD HH:MM:SS"
                 try:
-                    item_time = datetime.strptime(item_time_str, "%Y/%m/%d %H:%M:%S")
+                    item_time = datetime.strptime(item_time_str, "%Y-%m-%d %H:%M:%S")
                 except ValueError:
                     # 格式2: "YYYY/MM/DD/HH/MM/SS" 
                     try:

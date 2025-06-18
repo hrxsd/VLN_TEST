@@ -68,14 +68,14 @@ class ImageProcessor:
                                 {"type": "text", "text": '''Please analyze this image and provide the following information in JSON format:
 
 1. First, carefully look at the TOP RIGHT corner of the image where there should be text showing:
-   - Time information in format: YYYY/MM/DD/HH/MM/SS
+   - Time information in format: YYYY-MM-DD HH:MM:SS
    - Position information showing coordinates (x, y, orientation)
 2. Then, describe what you see in the main content of the image (objects, people, activities, environment) from the first point of view".
 
 Please return your response in this exact JSON format:
 {
     "caption": "description of the main image content",
-    "time": "YYYY/MM/DD/HH/MM/SS",
+    "time": "YYYY-MM-DD HH:MM:SS",
     "position": [x, y, orientation]
 }
 
@@ -168,7 +168,7 @@ Focus carefully on reading the text in the top right corner for accurate time an
                     if simple_caption:
                         return {
                             "caption": simple_caption,
-                            "time": "2025/1/1/0:0:0",
+                            "time": "2025-1-1 0:0:0",
                             "position": [0.0, 0.0, 0.0]
                         }
                     return None
@@ -190,7 +190,7 @@ Focus carefully on reading the text in the top right corner for accurate time an
             if simple_caption:
                 return {
                     "caption": simple_caption,
-                    "time": "2025/1/1/0:0:0",
+                    "time": "2025-1-1 0:0:0",
                     "position": [0.0, 0.0, 0.0]
                 }
             return None

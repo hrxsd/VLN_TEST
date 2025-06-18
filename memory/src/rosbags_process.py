@@ -123,7 +123,7 @@ class RosbagImageExtractor:
         
         # 将时间戳转换为日期时间格式
         dt = datetime.fromtimestamp(timestamp)
-        time_str = dt.strftime("Time: %Y/%m/%H/%M/%S")
+        time_str = dt.strftime("Time: %Y-%m-%d %H:%M:%S")
         
         # 准备位置信息文本
         if position:
