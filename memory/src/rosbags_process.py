@@ -128,7 +128,7 @@ class RosbagImageExtractor:
         # 准备位置信息文本
         if position:
             x, y, yaw = position
-            pos_str = f"Pos: ({x:.3f}, {y:.3f}, {yaw:.3f})"
+            pos_str = f"Pos: [{x:.3f}, {y:.3f}, {yaw:.3f}]"
         else:
             pos_str = "Pos: N/A"
         

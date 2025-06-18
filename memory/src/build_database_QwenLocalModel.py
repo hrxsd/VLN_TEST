@@ -318,7 +318,7 @@ Focus carefully on reading the text in the top right corner for accurate time an
             print(f"批量生成嵌入失败: {e}")
             return [None] * len(captions)
     
-    def process_batch_images(self, image_paths: List[str]) -> List[Optional[Dict]]:
+    def process_batch_images(self, image_paths: List[str], vlm_batch_size: int = 4) -> List[Optional[Dict]]:
         """
         批量处理多张图像，生成完整的记录
         
@@ -331,7 +331,7 @@ Focus carefully on reading the text in the top right corner for accurate time an
         print(f"批量处理 {len(image_paths)} 张图像")
         
         # 使用视觉语言模型批量提取描述和元数据
-        results = self.extract_metadata_and_caption_batch(image_paths)
+        results = self.extract_metadata_and_caption_batch(image_paths, vlm_batch_size)  # 传递批处理大小
         
         # 初始化records列表，长度与image_paths相同
         records = [None] * len(image_paths)
@@ -364,8 +364,8 @@ Focus carefully on reading the text in the top right corner for accurate time an
         return records
     
     def process_images_batch(self, images_folder: str, output_file: str, 
-                           start_id: int = 0, end_id: Optional[int] = None,
-                           batch_size: int = 8) -> List[Dict]:
+                       start_id: int = 0, end_id: Optional[int] = None,
+                       batch_size: int = 8, vlm_batch_size: int = 4) -> List[Dict]: 
         """
         批量处理图像文件夹中的图像
         
@@ -403,7 +403,7 @@ Focus carefully on reading the text in the top right corner for accurate time an
             print(f"批次文件: {[filename for _, filename in batch_files]}")
             
             # 批量处理当前批次的图像
-            batch_records = self.process_batch_images(batch_paths)
+            batch_records = self.process_batch_images(batch_paths, vlm_batch_size) 
             
             # 统计成功处理的图像并添加到总记录中
             successful_count = 0
@@ -455,7 +455,8 @@ def main():
             output_file=OUTPUT_FILE,
             start_id=0,  # 从000000.jpg开始
             end_id=None,  # 处理所有图像，也可以指定结束ID
-            batch_size=1  # 可以根据GPU内存调整批处理大小
+            batch_size=16,  # 可以根据GPU内存调整批处理大小
+            vlm_batch_size=16
         )
         
         print(f"\n处理完成！生成了 {len(records)} 条记录")
