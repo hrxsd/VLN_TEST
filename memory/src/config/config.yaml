@@ -2,7 +2,7 @@
 
 # 数据库配置
 database:
-  path: "/home/sony/VLN_TEST/memory/data/vector_database.json"
+  path: "/home/arts/VLN_TEST/memory/data/vector_database.json"
 
 # 嵌入模型配置
 embedding:

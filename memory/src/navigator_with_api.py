@@ -20,13 +20,13 @@ from utils.data_loader import DataLoader
 
 class VectorRetrievalSystem:
     """向量检索系统主类"""
-    
+
     def __init__(self, config_path: str):
         """初始化系统"""
         # 加载配置
         with open(config_path, 'r') as f:
             self.config = yaml.safe_load(f)
-        
+       
         # 初始化ROS节点
         rospy.init_node('vector_retrieval_ros_node', anonymous=True)
         rospy.loginfo("Vector Retrieval ROS System Starting...")
@@ -77,14 +77,18 @@ class VectorRetrievalSystem:
         # 步骤4: 处理导航请求
         if "position" in answer:
             nav_success = self.nav_controller.send_goal(answer["position"])
-            answer["navigation_status"] = "started" if nav_success else "failed"
+            answer["navigation_status"] = (
+                "started"
+                if nav_success
+                else "failed"
+            )
             if nav_success:
                 answer["text"] += " 我正在导航到目标位置。"
             else:
                 answer["text"] += " 导航启动失败，请检查move_base状态。"
         
         return answer
-    
+   
     def run(self):
         """运行主循环"""
         print("=== ROS向量数据库检索系统 ===")
