@@ -28,7 +28,7 @@ cd memory/src
 # 对rosbag解包
 python rosbag_extractor.py your_bag.bag --image_topic /your_image_topic --odom_topic /your_odom_topic
 ```
-处理完成后，会在data/images文件夹看到一系列图片。
+处理完成后，会在`data/images`文件夹看到一系列图片。
 
 构建向量数据库。
 ```bash
@@ -37,7 +37,7 @@ python build_database_QwenAPI.py ../data/images
 # 如果使用本地部署的QwenVL2.5-7B模型(对显卡及显存要求较高)
 python build_database_QwenLocalModel.py ../data/images
 ```
-该过程可能会持续一段时间，完成后可以在memory/data文件夹下看到vector_database.json文件
+该过程可能会持续一段时间，完成后可以在`memory/data`文件夹下看到`vector_database.json`文件
 ### 3. 导航
 需启动机器人move-base导航系统。
 ```bash
