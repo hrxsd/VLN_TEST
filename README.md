@@ -30,4 +30,22 @@ python rosbag_extractor.py your_bag.bag --image_topic /your_image_topic --odom_t
 ```
 处理完成后，会在data/images文件夹看到一系列图片。
 
+构建向量数据库。
+```bash
+# 如果使用Qwen视觉语言模型的API(API额度有限，不建议此方式)
+python build_database_QwenAPI.py ../data/images
+# 如果使用本地部署的QwenVL2.5-7B模型(对显卡及显存要求较高)
+python build_database_QwenLocalModel.py ../data/images
+```
+该过程可能会持续一段时间，完成后可以在memory/data文件夹下看到vector_database.json文件
+### 3. 导航
+需启动机器人move-base导航系统。
+```bash
+# 单目标点
+python navigator_with_api.py config/config.yaml
+# 多目标点
+python multi_step_navigation_ros.py
+# 若只想测试LLM检索引擎，不需要实际导航
+python multi_step_navigation_test.py 
+```
 
