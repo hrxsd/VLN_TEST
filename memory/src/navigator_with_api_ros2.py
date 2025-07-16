@@ -105,7 +105,7 @@ class VectorRetrievalSystem(Node):
         self.input_thread.start()
     
     def _input_loop(self):
-        """用户输入循环"""
+        """用户输入循环"""  
         print("=== ROS2向量数据库检索系统 ===")
         print("命令说明:")
         print("- 输入问题进行查询")
