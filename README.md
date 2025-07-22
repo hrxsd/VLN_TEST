@@ -57,6 +57,7 @@ python multi_step_navigation_test.py
 python navigator_with_api_audio.py
 ```
 ### 4. G1运控
+开机 & 机器人初始化参考宇树官方文档操作说明：https://support.unitree.com/home/zh/G1_developer/Operational_guidance
 ```
 cd VLN_TEST/g1_base_controller/loco
 # 启动控制服务
