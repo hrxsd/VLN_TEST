@@ -1,0 +1,27 @@
+<launch>
+    <arg name="base_foot_print" default="base_link" />
+    <arg name="map_frame" default="3dmap" />
+    <arg name="serial_addr" default="/dev/ttyUSB0" />
+    <arg name="localization" default="true" />
+    <arg name="rviz" default="true" />
+
+   <group if="$(arg rviz)">
+   
+       <node name="rviz" pkg="rviz" type="rviz" args="-d $(find navigation)/rviz/navi.rviz" required="true" />
+   </group> 
+
+
+    <include if="$(arg localization)"  file="$(find hdl_localization)/launch/hdl_localization.launch"/>
+
+    <arg name="use_sim" default="false"/>
+    <arg name="use_rviz" default="false"/>
+    <arg name="drag" default="false"/>
+<!-- use_sim="$(arg use_sim) " use_rviz="$(arg use_rviz)" drag="$(arg drag)"  -->
+
+    <node pkg="robot_teleop" type="keyboard_nav.py" name="teleop_twist_keyboard_nav_node" /> 
+
+    <node name="nav_to_object" pkg="navigation" type="nav_to_object"/>
+    <node name="semantic_marker" pkg="navigation" type="semantic_marker.py"/>
+    <node name="user_input" pkg="navigation" type="llm_nav.py" launch-prefix="gnome-terminal --title=welcome! --"/>
+
+</launch>

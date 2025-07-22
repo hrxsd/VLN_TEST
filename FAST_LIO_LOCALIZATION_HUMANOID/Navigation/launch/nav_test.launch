@@ -1,0 +1,36 @@
+<launch>
+    <arg name="base_foot_print" default="body" />
+    <arg name="map_frame" default="map" />
+    <arg name="localization" default="true" />
+    <arg name="rviz" default="false" />
+
+    <group if="$(arg rviz)">
+        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find navigation)/rviz/navi.rviz" required="true" />
+    </group> 
+    
+    <!-- <node name="map_map_broadcaster" pkg="tf2_ros" type="static_transform_publisher" args="0 0 1.4 0 0 0 /map /3dmap" /> -->
+    <!-- map_server -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find navigation)/config/map/map.yaml" />
+
+    <!-- localization -->
+    <include if="$(arg localization)"  file="$(find open3d_loc)/launch/localization_3d_g1.launch"/>
+    <!-- mid360 -->
+    <!-- <include if="$(arg localization)"  file="$(find livox_ros_driver2)/launch_ROS1/msg_MID360.launch"/> -->
+
+    <!-- move_base -->
+    <node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen" clear_params="false" >
+        <rosparam file="$(find navigation)/config/move_base_param.yaml" command="load" />
+        <rosparam file="$(find navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find navigation)/config/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find navigation)/config/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find navigation)/config/global_planner_params.yaml" command="load" />
+        <rosparam file="$(find navigation)/config/dwa_local_planner_params.yaml" command="load" />
+        <!-- <rosparam file="$(find navigation)/config/mpc_local_planner_params_minimum_time.yaml" command="load" /> -->
+    </node>
+
+    <arg name="use_sim" default="false"/>
+    <arg name="use_rviz" default="false"/>
+    <arg name="drag" default="false"/>
+
+</launch>

@@ -1,0 +1,11 @@
+<launch>
+
+    
+    <node name="pcd2pgm" pkg="fast_lio" type="pcd2pgm" output="screen"  />
+
+    <arg name="filename" value="$(find navigation)/config/map/map" />
+
+    <node name="map_save" pkg="map_server" type="map_saver" args="-f $(arg filename)"  output="screen" />
+
+    
+</launch>
