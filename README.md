@@ -46,6 +46,8 @@ python navigator_with_api.py config/config.yaml
 # 多目标点
 python multi_step_navigation_ros.py
 # 若只想测试LLM检索引擎，不需要实际导航
-python multi_step_navigation_test.py 
+python multi_step_navigation_test.py
+# 带语音功能
+python navigator_with_api_audio.py
 ```
 
