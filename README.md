@@ -2,6 +2,7 @@
 ## 介绍
 本项目实现了基于长期记忆的语义导航，支持多种问答模式和多点导航功能。
 ## 安装
+### memory相关
 测试环境：Ubuntu20.04，ROS Noetic，RTX4090 24GB
 
 创建虚拟环境：
@@ -17,6 +18,7 @@ pip install dashscope
 python -m pip install -U sentence-transformers
 pip install openai==0.28
 ```
+### 建图 & 导航相关
 
 ## 使用
 ### 1. 录制rosbag
