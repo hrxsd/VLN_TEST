@@ -56,4 +56,12 @@ python multi_step_navigation_test.py
 # 带语音功能
 python navigator_with_api_audio.py
 ```
-
+### 4. G1运控
+```
+cd VLN_TEST/g1_base_controller/loco
+# 启动控制服务
+./g1_base_control.sh start
+# 关闭控制服务
+./g1_base_control.sh stop
+```
+机器人运动过程中，按下遥控器select键为软急停。
