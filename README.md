@@ -22,6 +22,8 @@ pip install openai==0.28
 建图和定位方案采用开源方案FAST_LIO_LOCALIZATION_HUMANOID，专用于人形机器人的3D SLAM定位系统，针对宇树G1在头部向下的雷达排布做了适配，可支持ROS原生的定位初始化。具体配置可以参考https://mn2ehoz71j.feishu.cn/docx/LTRRdTXikomDoSxWmqucRFMinrh?from=from_copylink
 
 注意将FAST_LIO_LOCALIZATION_HUMANOID文件夹放在单独的ros-workspace内。
+### G1机器人控制相关
+unitree_sdk_python依赖安装参考宇树官方GitHub：https://github.com/unitreerobotics/unitree_sdk2_python/blob/master/README%20zh.md
 ## 使用
 ### 1. 录制rosbag
 包含里程计topic和图像topic。测试中使用fastlio2作为里程计数据来源。
