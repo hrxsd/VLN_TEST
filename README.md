@@ -45,11 +45,20 @@ python build_database_QwenLocalModel.py ../data/images
 ```
 该过程可能会持续一段时间，完成后可以在`memory/data`文件夹下看到`vector_database.json`文件
 ### 3. 导航
-需启动机器人move-base导航系统。
+需先启动机器人move-base导航系统：
+```bash
+# 进入机器人导航workspace
+source devel/setup.bash
+# 启动movebase导航服务
+roslaunch navigation nav_test.launch
+# 开启mid360
+roslaunch livox_ros_driver2 msg_MID360.launch
+```
+启动memory功能脚本：
 ```bash
 # 单目标点
 python navigator_with_api.py config/config.yaml
-# 多目标点
+# 多目标点（尚在测试）
 python multi_step_navigation_ros.py
 # 若只想测试LLM检索引擎，不需要实际导航
 python multi_step_navigation_test.py
@@ -58,7 +67,7 @@ python navigator_with_api_audio.py
 ```
 ### 4. G1运控
 开机 & 机器人初始化参考宇树官方文档操作说明：https://support.unitree.com/home/zh/G1_developer/Operational_guidance
-```
+```bash
 cd VLN_TEST/g1_base_controller/loco
 # 启动控制服务
 ./g1_base_control.sh start
